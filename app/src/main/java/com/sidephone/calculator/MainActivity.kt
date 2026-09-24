@@ -9,10 +9,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.sidephone.calculator.calculator.Calculator
+import com.sidephone.calculator.input.Keypad
+import com.sidephone.calculator.ui.screens.CompactQwertyScreen
+import com.sidephone.calculator.ui.screens.T9Screen
+import com.sidephone.calculator.ui.screens.TouchScreen
 import com.sidephone.calculator.ui.theme.CalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,11 +30,22 @@ class MainActivity : ComponentActivity() {
 			CalculatorTheme {
 				Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 					val expression = calculator.expression.collectAsState().value
+					val layout = calculator.layout.collectAsState().value
 
-					Text(
-						text = "Expression: $expression",
-						modifier = Modifier.padding(innerPadding)
-					)
+					when (layout) {
+						Keypad.Layout.COMPACT_QWERTY -> CompactQwertyScreen(
+							modifier = Modifier.padding(innerPadding),
+							expression = expression
+						)
+						Keypad.Layout.T9 -> T9Screen(
+							modifier = Modifier.padding(innerPadding),
+							expression = expression
+						)
+						else -> TouchScreen(
+							modifier = Modifier.padding(innerPadding),
+							expression = expression
+						)
+					}
 				}
 			}
 		}

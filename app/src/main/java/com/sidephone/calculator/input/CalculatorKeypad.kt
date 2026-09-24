@@ -16,8 +16,8 @@ class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
 
 	override fun onChange() {
 		when (layout.value) {
-			LAYOUT.COMPACT_QWERTY -> setCompactQwertyLayout()
-			LAYOUT.T9 -> setT9Layout()
+			Layout.COMPACT_QWERTY -> setCompactQwertyLayout()
+			Layout.T9 -> setT9Layout()
 			else -> keyActions.clear()
 		}
 	}
