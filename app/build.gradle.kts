@@ -33,6 +33,9 @@ android {
 	buildFeatures {
 		compose = true
 	}
+
+	tasks.matching { it.name == "assembleDebug" || it.name == "assembleRelease" }
+    .configureEach { dependsOn("testDebugUnitTest") }
 }
 
 dependencies {
