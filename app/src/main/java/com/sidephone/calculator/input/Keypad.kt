@@ -8,22 +8,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class Keypad(private val inputManager: InputManager) {
-	enum class TYPE { COMPACT_QWERTY, GAMEPAD, NONE, T9 }
+	enum class LAYOUT { COMPACT_QWERTY, GAMEPAD, NONE, T9 }
 
-	private val types = mapOf(
-		"d9bf35cac6ea4aa8e3d2e56aaf6548022165ff41" to TYPE.COMPACT_QWERTY, // gxa535_qwerty
-		"f039f068d76b8ac29f9727f377ef44ee36f8876a" to TYPE.GAMEPAD, // // gxa535_gamepad
-		"a2169ecfa473854b09588692a30fe13505a1336f" to TYPE.T9 // gxa535_phone
+	private val layouts = mapOf(
+		"d9bf35cac6ea4aa8e3d2e56aaf6548022165ff41" to LAYOUT.COMPACT_QWERTY, // gxa535_qwerty
+		"f039f068d76b8ac29f9727f377ef44ee36f8876a" to LAYOUT.GAMEPAD, // // gxa535_gamepad
+		"a2169ecfa473854b09588692a30fe13505a1336f" to LAYOUT.T9 // gxa535_phone
 	)
 
 	private val changeListener = object : InputManager.InputDeviceListener {
 		override fun onInputDeviceAdded(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
-		override fun onInputDeviceRemoved(deviceId: Int) { _current.value = TYPE.NONE; onChange() }
+		override fun onInputDeviceRemoved(deviceId: Int) { _layout.value = LAYOUT.NONE; onChange() }
 		override fun onInputDeviceChanged(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
 	}
 
-	private val _current = MutableStateFlow(TYPE.NONE)
-	val current: StateFlow<TYPE> = _current
+	private val _layout = MutableStateFlow(LAYOUT.NONE)
+	val layout: StateFlow<LAYOUT> = _layout
 
 
 	abstract fun onChange()
@@ -38,19 +38,19 @@ abstract class Keypad(private val inputManager: InputManager) {
 
 
 	private fun detect(device: InputDevice?) {
-		val oldType = _current.value
+		val oldType = _layout.value
 
-		_current.value = TYPE.NONE
+		_layout.value = LAYOUT.NONE
 
 		if (
 			device != null
 			&& !device.isVirtual
 			&& device.supportsSource(InputDevice.SOURCE_KEYBOARD)
 		) {
-			_current.value = types[device.descriptor] ?: TYPE.NONE
+			_layout.value = layouts[device.descriptor] ?: LAYOUT.NONE
 		}
 
-		if (oldType != _current.value)
+		if (oldType != _layout.value)
 			onChange()
 	}
 
