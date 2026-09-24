@@ -15,7 +15,6 @@ import com.sidephone.calculator.ui.components.Button
 import com.sidephone.calculator.ui.components.ButtonAC
 import com.sidephone.calculator.ui.components.ButtonEquals
 import com.sidephone.calculator.ui.components.ButtonLargeText
-import com.sidephone.calculator.ui.components.ButtonPeriod
 import com.sidephone.calculator.ui.components.ExpressionField
 
 @Composable
@@ -55,7 +54,7 @@ fun TouchScreen(modifier: Modifier, calculator: Calculator) {
 			}
 			Row {
 				Button(modifier = buttonModifier, textResId = R.string.button_0, onClick = { calculator.onAction(Action.NUM_0) })
-				ButtonPeriod(modifier = buttonModifier, onClick = { calculator.onAction(Action.PERIOD) })
+				Button(modifier = buttonModifier, textResId = R.string.button_period, onClick = { calculator.onAction(Action.PERIOD) })
 				Button(modifier = buttonModifier, textResId = R.string.button_backspace, onClick = { calculator.onAction(Action.BACKSPACE) })
 				ButtonEquals(modifier = buttonModifier) { calculator.onAction(Action.EQUALS) }
 			}

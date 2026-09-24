@@ -19,5 +19,6 @@
 	<string name="button_multiply">×</string>
 	<string name="button_parenthesis_left">(</string>
 	<string name="button_parenthesis_right">)</string>
+	<string name="button_period">.</string>
 	<string name="button_subtract">−</string>
 </resources>
