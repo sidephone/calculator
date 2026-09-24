@@ -266,7 +266,7 @@ class EngineTest {
 
 	@Test
 	fun leftParenthesisAfterErrorStartsNewExpression() {
-		assertEquals("(", evaluate("1÷2=("))
+		assertEquals("(", evaluate("1÷0=("))
 	}
 
 	@Test
