@@ -39,12 +39,12 @@ class MainActivity : ComponentActivity() {
 
 	override fun onResume() {
 		super.onResume()
-		calculator.listenForChanges()
+		calculator.listenForKeypadChange()
 	}
 
 	override fun onPause() {
 		super.onPause()
-		calculator.stopListening()
+		calculator.stopListeningForKeypadChange()
 	}
 
 	override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
