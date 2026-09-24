@@ -18,7 +18,7 @@ abstract class Keypad(private val inputManager: InputManager) {
 
 	private val changeListener = object : InputManager.InputDeviceListener {
 		override fun onInputDeviceAdded(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
-		override fun onInputDeviceRemoved(deviceId: Int) { _current.value = TYPE.NONE }
+		override fun onInputDeviceRemoved(deviceId: Int) { _current.value = TYPE.NONE; onChange() }
 		override fun onInputDeviceChanged(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
 	}
 
