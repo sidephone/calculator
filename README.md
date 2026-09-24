@@ -8,3 +8,10 @@ Tested with Android Studio Quail 4 | 2026.1.4
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
+
+
+## TODO
+- Prevent too long numbers from breaking the layout
+- QWERTY support
+- new T9 support
+- old t9 support

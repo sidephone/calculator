@@ -44,8 +44,8 @@ class ExpressionParserTest {
 	fun basicOperations() {
 		assertEval("5", "2+3")
 		assertEval("1", "3-2")
-		assertEval("12", "3*4")
-		assertEval("2.5", "10/4")
+		assertEval("12", "3×4")
+		assertEval("2.5", "10÷4")
 	}
 
 	@Test
@@ -58,17 +58,17 @@ class ExpressionParserTest {
 
 	@Test
 	fun multiplicationBindsTighterThanAddition() {
-		assertEval("14", "2+3*4")
-		assertEval("2", "8-2*3")
-		assertEval("4", "2+6/3")
-		assertEval("26", "2*3+4*5")
+		assertEval("14", "2+3×4")
+		assertEval("2", "8-2×3")
+		assertEval("4", "2+6÷3")
+		assertEval("26", "2×3+4×5")
 	}
 
 	@Test
 	fun operatorsAreLeftAssociative() {
 		assertEval("3", "10-4-3")      // (10-4)-3, not 10-(4-3)
-		assertEval("5", "100/10/2")    // (100/10)/2, not 100/(10/2)
-		assertEval("24", "2*3*4")
+		assertEval("5", "100÷10÷2")    // (100/10)/2, not 100/(10/2)
+		assertEval("24", "2×3×4")
 	}
 
 	// ---- unary signs -----------------------------------------------------
@@ -78,8 +78,8 @@ class ExpressionParserTest {
 		assertEval("-2", "-2")
 		assertEval("5", "+5")
 		assertEval("2", "-2+4")
-		assertEval("-15", "5*-3")
-		assertEval("-2", "8/-4")
+		assertEval("-15", "5×-3")
+		assertEval("-2", "8÷-4")
 		assertEval("8", "5--3")
 		assertEval("3", "--3")
 		assertEval("-3", "-+3")
@@ -89,23 +89,23 @@ class ExpressionParserTest {
 
 	@Test
 	fun parenthesesOverridePrecedence() {
-		assertEval("14", "2*(3+4)")
-		assertEval("20", "(2+3)*4")
-		assertEval("21", "(1+2)*(3+4)")
+		assertEval("14", "2×(3+4)")
+		assertEval("20", "(2+3)×4")
+		assertEval("21", "(1+2)×(3+4)")
 		assertEval("1", "10-(4+5)")
 	}
 
 	@Test
 	fun nestedParentheses() {
 		assertEval("2", "((2))")
-		assertEval("5", "((1+2)*3)-4")
-		assertEval("14", "(2*(3+(4/2)))+4")
+		assertEval("5", "((1+2)×3)-4")
+		assertEval("14", "(2×(3+(4÷2)))+4")
 	}
 
 	@Test
 	fun unaryOperatorsWithParentheses() {
 		assertEval("-5", "-(2+3)")
-		assertEval("-4", "2*-(1+1)")
+		assertEval("-4", "2×-(1+1)")
 		assertEval("2", "-(-(2))")
 		assertEval("5", "+(2+3)")
 	}
@@ -115,22 +115,22 @@ class ExpressionParserTest {
 	@Test
 	fun decimalArithmeticIsExact() {
 		assertEval("0.3", "0.1+0.2")
-		assertEval("0.3", "3*0.1")
+		assertEval("0.3", "3×0.1")
 		assertEval("3.75", "1.5+2.25")
-		assertEval("2", "0.5*4")
+		assertEval("2", "0.5×4")
 	}
 
 	@Test
 	fun nonTerminatingDivisionIsRounded() {
 		// MathContext.DECIMAL64 gives 16 significant digits
-		assertEval("0.3333333333333333", "1/3")
+		assertEval("0.3333333333333333", "1÷3")
 	}
 
 	@Test
 	fun largeNumbersDoNotOverflow() {
 		val big = "99999999999999999999"
 		val expected = BigDecimal(big).pow(2)
-		assertEquals(0, expected.compareTo(eval("$big*$big")))
+		assertEquals(0, expected.compareTo(eval("$big×$big")))
 	}
 
 	// ---- incomplete expressions (user is still typing) -------------------
@@ -140,15 +140,15 @@ class ExpressionParserTest {
 		assertIncomplete("")
 		assertIncomplete("2+")
 		assertIncomplete("2-")
-		assertIncomplete("2*")
-		assertIncomplete("2/")
+		assertIncomplete("2×")
+		assertIncomplete("2÷")
 		assertIncomplete("-")
-		assertIncomplete("2*-")
+		assertIncomplete("2×-")
 		assertIncomplete("(")
 		assertIncomplete("2+(")
 		assertIncomplete("(2+3")
-		assertIncomplete("3*(4+")
-		assertIncomplete("((2+3)*4")
+		assertIncomplete("3×(4+")
+		assertIncomplete("((2+3)×4")
 	}
 
 	// ---- invalid expressions (genuinely wrong) ---------------------------
@@ -200,8 +200,8 @@ class ExpressionParserTest {
 
 	@Test
 	fun divisionByZero() {
-		assertFailsWith<ArithmeticException> { eval("1/0") }
-		assertFailsWith<ArithmeticException> { eval("0/0") }
-		assertFailsWith<ArithmeticException> { eval("5/(3-3)") }
+		assertFailsWith<ArithmeticException> { eval("1÷0") }
+		assertFailsWith<ArithmeticException> { eval("0÷0") }
+		assertFailsWith<ArithmeticException> { eval("5÷(3-3)") }
 	}
 }

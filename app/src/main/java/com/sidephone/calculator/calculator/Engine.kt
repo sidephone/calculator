@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 class Engine {
 	private companion object {
 		const val ERROR = "Error"
-		val OPERATORS = setOf(Actions.ADD, Actions.SUBTRACT, Actions.MULTIPLY, Actions.DIVIDE)
+		val OPERATORS = setOf(Action.ADD, Action.SUBTRACT, Action.MULTIPLY, Action.DIVIDE)
 		val OPERATOR_CHARS = OPERATORS.map { it.symbol!![0] }
 	}
 
@@ -17,11 +17,11 @@ class Engine {
 	private var justEvaluated = false   // last action was '=' (or an error)
 
 
-	fun onAction(action: Actions) {
+	fun onAction(action: Action) {
 		when (action) {
-			Actions.EQUALS -> evaluateExpression()
-			Actions.ALL_CLEAR -> reset("")
-			Actions.BACKSPACE -> {
+			Action.EQUALS -> evaluateExpression()
+			Action.ALL_CLEAR -> reset("")
+			Action.BACKSPACE -> {
 				if (justEvaluated) reset("") else _expression.update { it.dropLast(1) }
 			}
 
@@ -30,12 +30,12 @@ class Engine {
 	}
 
 
-	private fun append(action: Actions) {
+	private fun append(action: Action) {
 		val symbol = action.symbol ?: return
 		val isOperator = action in OPERATORS
 
 		if (justEvaluated) {
-			if (action == Actions.RIGHT_PAREN) return   // nothing to close after a result
+			if (action == Action.RIGHT_PAREN) return   // nothing to close after a result
 			// Digit, period or '(' starts fresh; an operator continues from the result.
 			// (After an error the text is "Error", which is never continued.)
 			if (!isOperator || _expression.value == ERROR) _expression.value = ""

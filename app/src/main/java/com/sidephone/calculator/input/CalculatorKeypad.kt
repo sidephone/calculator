@@ -2,11 +2,11 @@ package com.sidephone.calculator.input
 
 import android.hardware.input.InputManager
 import android.view.KeyEvent
-import com.sidephone.calculator.calculator.Actions
+import com.sidephone.calculator.calculator.Action
 
 class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
-	private val keyActions = mutableMapOf<Int, Actions>() // empty = use touchscreen
-	internal var onAction: (Actions) -> Unit = { action -> onAction(action) }
+	private val keyActions = mutableMapOf<Int, Action>() // empty = use touchscreen
+	internal var onAction: (Action) -> Unit = { action -> onAction(action) }
 
 
 	init {
@@ -16,8 +16,8 @@ class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
 
 	override fun onChange() {
 		when (layout.value) {
-			LAYOUT.COMPACT_QWERTY -> setCompactQwertyLayout()
-			LAYOUT.T9 -> setT9Layout()
+			Layout.COMPACT_QWERTY -> setCompactQwertyLayout()
+			Layout.T9 -> setT9Layout()
 			else -> keyActions.clear()
 		}
 	}
@@ -42,28 +42,28 @@ class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
 		keyActions.clear()
 
 		// digits
-		keyActions[KeyEvent.KEYCODE_SPACE] = Actions.NUM_0
-		keyActions[KeyEvent.KEYCODE_E] = Actions.NUM_1
-		keyActions[KeyEvent.KEYCODE_T] = Actions.NUM_2
-		keyActions[KeyEvent.KEYCODE_U] = Actions.NUM_3
-		keyActions[KeyEvent.KEYCODE_D] = Actions.NUM_4
-		keyActions[KeyEvent.KEYCODE_G] = Actions.NUM_5
-		keyActions[KeyEvent.KEYCODE_J] = Actions.NUM_6
-		keyActions[KeyEvent.KEYCODE_C] = Actions.NUM_7
-		keyActions[KeyEvent.KEYCODE_B] = Actions.NUM_8
-		keyActions[KeyEvent.KEYCODE_M] = Actions.NUM_9
-		keyActions[KeyEvent.KEYCODE_SHIFT_LEFT] = Actions.PERIOD
+		keyActions[KeyEvent.KEYCODE_SPACE] = Action.NUM_0
+		keyActions[KeyEvent.KEYCODE_E] = Action.NUM_1
+		keyActions[KeyEvent.KEYCODE_T] = Action.NUM_2
+		keyActions[KeyEvent.KEYCODE_U] = Action.NUM_3
+		keyActions[KeyEvent.KEYCODE_D] = Action.NUM_4
+		keyActions[KeyEvent.KEYCODE_G] = Action.NUM_5
+		keyActions[KeyEvent.KEYCODE_J] = Action.NUM_6
+		keyActions[KeyEvent.KEYCODE_C] = Action.NUM_7
+		keyActions[KeyEvent.KEYCODE_B] = Action.NUM_8
+		keyActions[KeyEvent.KEYCODE_M] = Action.NUM_9
+		keyActions[KeyEvent.KEYCODE_SHIFT_LEFT] = Action.PERIOD
 
 		// basic arithmetic
-		keyActions[KeyEvent.KEYCODE_O] = Actions.ADD
-		keyActions[KeyEvent.KEYCODE_Q] = Actions.SUBTRACT
-		keyActions[KeyEvent.KEYCODE_L] = Actions.MULTIPLY
-		keyActions[KeyEvent.KEYCODE_A] = Actions.DIVIDE
+		keyActions[KeyEvent.KEYCODE_O] = Action.ADD
+		keyActions[KeyEvent.KEYCODE_Q] = Action.SUBTRACT
+		keyActions[KeyEvent.KEYCODE_L] = Action.MULTIPLY
+		keyActions[KeyEvent.KEYCODE_A] = Action.DIVIDE
 
 		// main functions
-		keyActions[KeyEvent.KEYCODE_ENDCALL] = Actions.ALL_CLEAR
-		keyActions[KeyEvent.KEYCODE_DEL] = Actions.BACKSPACE
-		keyActions[KeyEvent.KEYCODE_ENTER] = Actions.EQUALS
+		keyActions[KeyEvent.KEYCODE_ENDCALL] = Action.ALL_CLEAR
+		keyActions[KeyEvent.KEYCODE_DEL] = Action.BACKSPACE
+		keyActions[KeyEvent.KEYCODE_ENTER] = Action.EQUALS
 	}
 
 
@@ -71,27 +71,27 @@ class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
 		keyActions.clear()
 
 		// digits
-		keyActions[KeyEvent.KEYCODE_0] = Actions.NUM_0
-		keyActions[KeyEvent.KEYCODE_1] = Actions.NUM_1
-		keyActions[KeyEvent.KEYCODE_2] = Actions.NUM_2
-		keyActions[KeyEvent.KEYCODE_3] = Actions.NUM_3
-		keyActions[KeyEvent.KEYCODE_4] = Actions.NUM_4
-		keyActions[KeyEvent.KEYCODE_5] = Actions.NUM_5
-		keyActions[KeyEvent.KEYCODE_6] = Actions.NUM_6
-		keyActions[KeyEvent.KEYCODE_7] = Actions.NUM_7
-		keyActions[KeyEvent.KEYCODE_8] = Actions.NUM_8
-		keyActions[KeyEvent.KEYCODE_9] = Actions.NUM_9
-		keyActions[KeyEvent.KEYCODE_POUND] = Actions.PERIOD
+		keyActions[KeyEvent.KEYCODE_0] = Action.NUM_0
+		keyActions[KeyEvent.KEYCODE_1] = Action.NUM_1
+		keyActions[KeyEvent.KEYCODE_2] = Action.NUM_2
+		keyActions[KeyEvent.KEYCODE_3] = Action.NUM_3
+		keyActions[KeyEvent.KEYCODE_4] = Action.NUM_4
+		keyActions[KeyEvent.KEYCODE_5] = Action.NUM_5
+		keyActions[KeyEvent.KEYCODE_6] = Action.NUM_6
+		keyActions[KeyEvent.KEYCODE_7] = Action.NUM_7
+		keyActions[KeyEvent.KEYCODE_8] = Action.NUM_8
+		keyActions[KeyEvent.KEYCODE_9] = Action.NUM_9
+		keyActions[KeyEvent.KEYCODE_POUND] = Action.PERIOD
 
 		// basic arithmetic
-		keyActions[KeyEvent.KEYCODE_DPAD_UP] = Actions.ADD
-		keyActions[KeyEvent.KEYCODE_DPAD_DOWN] = Actions.SUBTRACT
-		keyActions[KeyEvent.KEYCODE_DPAD_RIGHT] = Actions.MULTIPLY
-		keyActions[KeyEvent.KEYCODE_DPAD_LEFT] = Actions.DIVIDE
+		keyActions[KeyEvent.KEYCODE_DPAD_UP] = Action.ADD
+		keyActions[KeyEvent.KEYCODE_DPAD_DOWN] = Action.SUBTRACT
+		keyActions[KeyEvent.KEYCODE_DPAD_RIGHT] = Action.MULTIPLY
+		keyActions[KeyEvent.KEYCODE_DPAD_LEFT] = Action.DIVIDE
 
 		// main functions
-		keyActions[KeyEvent.KEYCODE_ENDCALL] = Actions.ALL_CLEAR
-		keyActions[KeyEvent.KEYCODE_DEL] = Actions.BACKSPACE
-		keyActions[KeyEvent.KEYCODE_ENTER] = Actions.EQUALS
+		keyActions[KeyEvent.KEYCODE_ENDCALL] = Action.ALL_CLEAR
+		keyActions[KeyEvent.KEYCODE_DEL] = Action.BACKSPACE
+		keyActions[KeyEvent.KEYCODE_ENTER] = Action.EQUALS
 	}
 }
