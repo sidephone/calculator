@@ -1,10 +1,17 @@
 package com.sidephone.calculator.ui.screens
 
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.sidephone.calculator.ui.components.ExpressionField
 
 @Composable
 fun CompactQwertyScreen(modifier: Modifier, expression: String) {
-	Text("Compact QWERTY layout: $expression", modifier = modifier)
+	Column(
+		modifier = modifier.background(color = MaterialTheme.colorScheme.background)
+	) {
+		ExpressionField(expression)
+	}
 }

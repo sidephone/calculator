@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 						)
 						else -> TouchScreen(
 							modifier = Modifier.padding(innerPadding),
-							expression = expression
+							calculator = calculator
 						)
 					}
 				}

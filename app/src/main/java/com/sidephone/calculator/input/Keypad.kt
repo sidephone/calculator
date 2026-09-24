@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import java.util.Locale
 
 abstract class Keypad(private val inputManager: InputManager) {
-	enum class Layout { COMPACT_QWERTY, GAMEPAD, NONE, T9 }
+	enum class Layout { COMPACT_QWERTY, GAMEPAD, NONE, T9, UNKNOWN }
 
 	// native Sidephone keypads
 	private val layouts = mapOf(
@@ -36,6 +36,11 @@ abstract class Keypad(private val inputManager: InputManager) {
 
 
 	abstract fun onChange()
+
+
+	init {
+		_layout.value = Layout.UNKNOWN
+	}
 
 
 	fun detect() {

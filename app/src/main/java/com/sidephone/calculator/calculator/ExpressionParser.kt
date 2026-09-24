@@ -17,7 +17,7 @@ class ExpressionParser(private val src: String) {
 	}
 
 
-	// expression := term (('+' | '-') term)*
+	// expression := term (('+' | '-') term)×
 	private fun parseExpression(): BigDecimal {
 		var value = parseTerm()
 		while (pos < src.length && (src[pos] == '+' || src[pos] == '-')) {
@@ -62,13 +62,13 @@ class ExpressionParser(private val src: String) {
 	}
 
 
-	// term := factor (('*' | '/') factor)*
+	// term := factor (('×' | '÷') factor)*
 	private fun parseTerm(): BigDecimal {
 		var value = parseFactor()
-		while (pos < src.length && (src[pos] == '*' || src[pos] == '/')) {
+		while (pos < src.length && (src[pos] == '×' || src[pos] == '÷')) {
 			val op = src[pos++]
 			val rhs = parseFactor()
-			value = if (op == '*') value * rhs else value.divide(rhs, MathContext.DECIMAL64)
+			value = if (op == '×') value * rhs else value.divide(rhs, MathContext.DECIMAL64)
 		}
 		return value
 	}

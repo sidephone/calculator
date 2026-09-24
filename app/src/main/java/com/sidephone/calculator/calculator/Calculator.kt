@@ -17,6 +17,7 @@ class Calculator(inputManager: InputManager) {
 	}
 
 	fun listenForKeypadChange() = keypad.listenForChanges()
+	fun onAction(action: Action) = engine.onAction(action)
 	fun onKeyDown(keyCode: Int) = keypad.onKeyDown(keyCode)
 	fun onKeyUp(keyCode: Int) = keypad.onKeyUp(keyCode)
 	fun stopListeningForKeypadChange() = keypad.stopListening()
