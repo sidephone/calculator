@@ -7,7 +7,7 @@ import android.view.InputDevice
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class Keypad(private val inputManager: InputManager) {
+abstract class Keypad(private val inputManager: InputManager) {
 	enum class TYPE { COMPACT_QWERTY, GAMEPAD, NONE, T9 }
 
 	private val types = mapOf(
@@ -26,6 +26,9 @@ class Keypad(private val inputManager: InputManager) {
 	val current: StateFlow<TYPE> = _current
 
 
+	abstract fun onChange()
+
+
 	fun detect() {
 		inputManager
 			.inputDeviceIds
@@ -35,21 +38,27 @@ class Keypad(private val inputManager: InputManager) {
 
 
 	private fun detect(device: InputDevice?) {
+		val oldType = _current.value
+
 		_current.value = TYPE.NONE
 
 		if (
-			device == null
-			|| device.isVirtual
-			|| !device.supportsSource(InputDevice.SOURCE_KEYBOARD)
-		)
-			return
+			device != null
+			&& !device.isVirtual
+			&& device.supportsSource(InputDevice.SOURCE_KEYBOARD)
+		) {
+			_current.value = types[device.descriptor] ?: TYPE.NONE
+		}
 
-		_current.value = types[device.descriptor] ?: TYPE.NONE
+		if (oldType != _current.value)
+			onChange()
 	}
+
 
 	fun listenForChanges() {
 		inputManager.registerInputDeviceListener(changeListener, Handler(Looper.getMainLooper()))
 	}
+
 
 	fun stopListening() {
 		inputManager.unregisterInputDeviceListener(changeListener)
