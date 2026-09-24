@@ -1,6 +1,5 @@
 package com.sidephone.calculator.calculator
 
-import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -60,8 +59,7 @@ class Engine {
 			reset(result.stripTrailingZeros().toPlainString(), evaluated = true)
 		} catch (_: IncompleteExpressionException) {
 			// Incomplete expression: do nothing, let the user keep typing.
-		} catch (e: Exception) {   // ArithmeticException, IllegalArgumentException
-			Log.e("Calculator", "Error evaluating expression '${_expression.value}': ${e.message}")
+		} catch (_: Exception) {   // ArithmeticException, IllegalArgumentException
 			reset(ERROR, evaluated = true)
 		}
 	}
