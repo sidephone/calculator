@@ -12,7 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.sidephone.calculator.calculator.Calculator
-import com.sidephone.calculator.input.Keypad
+import com.sidephone.calculator.input.SidephoneKeypad
 import com.sidephone.calculator.ui.panels.PanelCompactQwerty
 import com.sidephone.calculator.ui.panels.PanelT9
 import com.sidephone.calculator.ui.panels.PanelTouch
@@ -32,11 +32,11 @@ class MainActivity : ComponentActivity() {
 					val layout = calculator.layout.collectAsState().value
 
 					when (layout) {
-						Keypad.Layout.COMPACT_QWERTY -> PanelCompactQwerty(
+						SidephoneKeypad.Layout.COMPACT_QWERTY -> PanelCompactQwerty(
 							modifier = Modifier.padding(innerPadding),
 							calculator = calculator
 						)
-						Keypad.Layout.T9 -> PanelT9(
+						SidephoneKeypad.Layout.T9 -> PanelT9(
 							modifier = Modifier.padding(innerPadding),
 							calculator = calculator
 						)
