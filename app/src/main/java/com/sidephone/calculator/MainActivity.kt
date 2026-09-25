@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 					when (layout) {
 						Keypad.Layout.COMPACT_QWERTY -> PanelCompactQwerty(
 							modifier = Modifier.padding(innerPadding),
-							expression = expression
+							calculator = calculator
 						)
 						Keypad.Layout.T9 -> PanelT9(
 							modifier = Modifier.padding(innerPadding),
