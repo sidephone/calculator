@@ -1,5 +1,7 @@
 <resources>
 	<string name="app_name">Sidephone Calculator</string>
+	<string name="error">Error</string>
+
 	<string name="button_0">0</string>
 	<string name="button_1">1</string>
 	<string name="button_2">2</string>
@@ -10,6 +12,7 @@
 	<string name="button_7">7</string>
 	<string name="button_8">8</string>
 	<string name="button_9">9</string>
+
 	<string name="button_ac">AC</string>
 	<string name="button_add">+</string>
 	<string name="button_backspace">⌫</string>
