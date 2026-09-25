@@ -13,5 +13,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) 
 ## TODO
 - Prevent too long numbers from breaking the layout
 - localize the "error" string
-- new T9 support
 - old t9 support
