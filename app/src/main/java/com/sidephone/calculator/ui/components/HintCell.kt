@@ -7,22 +7,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusProperties
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import com.sidephone.calculator.ui.modifiers.tint
 import com.sidephone.calculator.ui.theme.Dimens
 
 data class Hint(
-	val keySymbol: String,
 	val functionLabelResId: Int,
 	val functionLabelIsLarge: Boolean = false,
+	val keySymbol: String? = null,
 	val keyIsEmoji: Boolean = false,
 	val keySlashed: Boolean = false,
 	val primaryStyle: Boolean = false,
@@ -64,7 +58,9 @@ fun HintCell(modifier: Modifier = Modifier, hint: Hint? = null) {
 			)
 			.then(
 				if (hint?.onClick != null) {
-					Modifier.focusProperties { canFocus = false }.clickable(onClick = hint.onClick)
+					Modifier
+						.focusProperties { canFocus = false }
+						.clickable(onClick = hint.onClick)
 				} else {
 					Modifier
 				}
@@ -75,50 +71,8 @@ fun HintCell(modifier: Modifier = Modifier, hint: Hint? = null) {
 		if (hint == null) return@Box
 
 		Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-			Box(contentAlignment = Alignment.Center) {
-				val symbolModifier = if (hint.keyIsEmoji) {
-					Modifier.tint(textColor)
-				} else {
-					Modifier
-				}
-
-				Text(
-					modifier = symbolModifier,
-					text = hint.keySymbol,
-					style = if (hint.keyIsEmoji) MaterialTheme.typography.titleSmall else MaterialTheme.typography.titleMedium,
-					color = textColor,
-					textAlign = TextAlign.Center,
-					maxLines = 1,
-					overflow = TextOverflow.Clip
-				)
-
-				if (hint.keySlashed) {
-					Text(
-						"/",
-						color = textColor,
-						style = MaterialTheme.typography.labelLarge,
-						modifier = Modifier.graphicsLayer { rotationZ = 20f }
-					)
-				}
-			}
-
-			Text(
-				text = " ➞ ",
-				style = MaterialTheme.typography.titleMedium,
-				color = textColor,
-				textAlign = TextAlign.Center,
-				maxLines = 1,
-				overflow = TextOverflow.Clip
-			)
-
-			Text(
-				text = stringResource(hint.functionLabelResId),
-				style = if (hint.functionLabelIsLarge) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
-				color = textColor,
-				textAlign = TextAlign.Center,
-				maxLines = 1,
-				overflow = TextOverflow.Clip
-			)
+			HintCellSymbol(hint, textColor)
+			HintCellFunction(hint, textColor)
 		}
 	}
 }

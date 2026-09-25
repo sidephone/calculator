@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
 		setContent {
 			CalculatorTheme {
 				Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-					val expression = calculator.expression.collectAsState().value
 					val layout = calculator.layout.collectAsState().value
 
 					when (layout) {
@@ -39,7 +38,7 @@ class MainActivity : ComponentActivity() {
 						)
 						Keypad.Layout.T9 -> PanelT9(
 							modifier = Modifier.padding(innerPadding),
-							expression = expression
+							calculator = calculator
 						)
 						else -> PanelTouch(
 							modifier = Modifier.padding(innerPadding),

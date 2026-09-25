@@ -5,19 +5,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.ui.theme.Dimens
 
 @Composable
-fun ExpressionField(expression: String) {
+fun ExpressionField(calculator: Calculator) {
 	Text(
 		modifier = Modifier
 			.fillMaxWidth()
 			.padding(top = Dimens.expressionPadding, bottom = Dimens.expressionPaddingBottom, start = Dimens.expressionPadding, end = Dimens.expressionPadding),
 		color = MaterialTheme.colorScheme.onBackground,
 		style = MaterialTheme.typography.displaySmall,
-		text = expression.ifEmpty { "0" },
+		text = calculator.expression.collectAsState().value.ifEmpty { "0" },
 		textAlign = TextAlign.End,
 	)
 }
