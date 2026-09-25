@@ -55,10 +55,10 @@ class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
 		keyActions[KeyEvent.KEYCODE_SHIFT_LEFT] = Action.PERIOD
 
 		// basic arithmetic
-		keyActions[KeyEvent.KEYCODE_O] = Action.ADD
-		keyActions[KeyEvent.KEYCODE_Q] = Action.SUBTRACT
-		keyActions[KeyEvent.KEYCODE_L] = Action.MULTIPLY
-		keyActions[KeyEvent.KEYCODE_A] = Action.DIVIDE
+		keyActions[KeyEvent.KEYCODE_Q] = Action.ADD
+		keyActions[KeyEvent.KEYCODE_A] = Action.SUBTRACT
+		keyActions[KeyEvent.KEYCODE_O] = Action.MULTIPLY
+		keyActions[KeyEvent.KEYCODE_L] = Action.DIVIDE
 
 		// main functions
 		keyActions[KeyEvent.KEYCODE_ENDCALL] = Action.ALL_CLEAR
