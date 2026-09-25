@@ -1,4 +1,4 @@
-package com.sidephone.calculator.ui.screens
+package com.sidephone.calculator.ui.panels
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,7 @@ import com.sidephone.calculator.ui.components.ButtonLargeText
 import com.sidephone.calculator.ui.components.ExpressionField
 
 @Composable
-fun TouchScreen(modifier: Modifier, calculator: Calculator) {
+fun PanelTouch(modifier: Modifier, calculator: Calculator) {
 	Column(
 		modifier = modifier.background(color = MaterialTheme.colorScheme.background)
 	) {

@@ -10,4 +10,7 @@ object Dimens {
 
 	val expressionPadding = 16.dp
 	val expressionPaddingBottom = 8.dp
+
+	val hintCellPadding = 4.dp
+	val hintCellSpacing = 4.dp
 }

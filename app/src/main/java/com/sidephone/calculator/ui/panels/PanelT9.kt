@@ -1,4 +1,4 @@
-package com.sidephone.calculator.ui.screens
+package com.sidephone.calculator.ui.panels
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.sidephone.calculator.ui.components.ExpressionField
 
 @Composable
-fun T9Screen(modifier: Modifier, expression: String) {
+fun PanelT9(modifier: Modifier, expression: String) {
 	Column(
 		modifier = modifier.background(color = MaterialTheme.colorScheme.background)
 	) {
