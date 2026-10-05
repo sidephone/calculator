@@ -12,4 +12,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) 
 
 ## TODO
 - Add an icon
-- Prevent too long numbers from breaking the layout
