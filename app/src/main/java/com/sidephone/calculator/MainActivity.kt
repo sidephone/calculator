@@ -13,8 +13,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.input.Keypad
-import com.sidephone.calculator.ui.panels.PanelCompactQwerty
-import com.sidephone.calculator.ui.panels.PanelT9
+import com.sidephone.calculator.ui.panels.compactQwerty.PanelCompactQwerty
+import com.sidephone.calculator.ui.panels.t9.PanelT9
 import com.sidephone.calculator.ui.panels.PanelTouch
 import com.sidephone.calculator.ui.theme.CalculatorTheme
 
@@ -36,7 +36,8 @@ class MainActivity : ComponentActivity() {
 							modifier = Modifier.padding(innerPadding),
 							calculator = calculator
 						)
-						Keypad.Layout.T9 -> PanelT9(
+						Keypad.Layout.T9,
+						Keypad.Layout.T9_NO_DPAD -> PanelT9(
 							modifier = Modifier.padding(innerPadding),
 							calculator = calculator
 						)
