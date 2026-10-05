@@ -18,7 +18,8 @@ fun HintsDpad(modifier: Modifier = Modifier, grid: List<List<Hint?>>) {
 			Column(modifier = Modifier.padding(Dimens.hintCellSpacing / 2), verticalArrangement = Arrangement.spacedBy(Dimens.hintCellSpacing)) {
 				column.forEach { hint -> HintCell(
 					hint = hint,
-					modifier = Modifier.weight(1f).width(Dimens.hintCellMinWidth)
+					padding = Dimens.hintCellT9Padding,
+					modifier = Modifier.weight(1f).width(Dimens.hintCellMinWidth),
 				) }
 			}
 		}

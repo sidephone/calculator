@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.unit.Dp
+import com.sidephone.calculator.ui.theme.DISABLED_ALPHA
 import com.sidephone.calculator.ui.theme.Dimens
 
 data class Hint(
@@ -31,11 +33,13 @@ data class Hint(
  * empty placeholder, so a grid keeps its shape even where a key has no hint.
  */
 @Composable
-fun HintCell(modifier: Modifier = Modifier, hint: Hint? = null) {
+fun HintCell(modifier: Modifier = Modifier, padding: Dp, hint: Hint? = null) {
 	val background = if (hint?.primaryStyle == true) {
 		MaterialTheme.colorScheme.primary
 	} else if (hint?.secondaryStyle == true) {
 		MaterialTheme.colorScheme.secondary
+	} else if (hint?.functionLabelResId == 0) {
+		MaterialTheme.colorScheme.tertiary.copy(alpha = DISABLED_ALPHA)
 	} else {
 		MaterialTheme.colorScheme.tertiary
 	}
@@ -66,7 +70,7 @@ fun HintCell(modifier: Modifier = Modifier, hint: Hint? = null) {
 					Modifier
 				}
 			)
-			.padding(Dimens.hintCellPadding),
+			.padding(padding),
 		contentAlignment = Alignment.Center
 	) {
 		if (hint == null) return@Box
