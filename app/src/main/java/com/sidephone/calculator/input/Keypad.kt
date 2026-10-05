@@ -1,37 +1,55 @@
 package com.sidephone.calculator.input
 
 import android.hardware.input.InputManager
-import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.view.InputDevice
-import android.view.KeyCharacterMap
-import android.view.KeyEvent
-import java.util.Locale
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-/**
- * This adds support for non-Sidephone keypads. Otherwise, it is not necessary.
- */
-abstract class Keypad(inputManager: InputManager) : SidephoneKeypad(inputManager) {
-	// for foreign T9 keypad detection, check if the device has dpad keys
-	private val dpadKeys = listOf(
-		KeyEvent.KEYCODE_DPAD_UP,
-		KeyEvent.KEYCODE_DPAD_DOWN,
-		KeyEvent.KEYCODE_DPAD_LEFT,
-		KeyEvent.KEYCODE_DPAD_RIGHT,
-	).toIntArray()
+abstract class Keypad(private val inputManager: InputManager) {
+	enum class Layout { COMPACT_QWERTY, GAMEPAD, NONE, SUNDIAL, T9, T9_NO_DPAD, UNKNOWN }
 
-	private val isSidephone = Build.MANUFACTURER.uppercase(Locale.US) == "SIDEPHONE"
+	private val layouts = mapOf(
+		"d9bf35cac6ea4aa8e3d2e56aaf6548022165ff41" to Layout.COMPACT_QWERTY, // gxa535_qwerty
+		"f039f068d76b8ac29f9727f377ef44ee36f8876a" to Layout.GAMEPAD, // // gxa535_gamepad
+		"b1d7968bf965b884f53acbd93afcef9c147f49bc" to Layout.SUNDIAL, // // gxa535_media
+		"a2169ecfa473854b09588692a30fe13505a1336f" to Layout.T9, // gxa535_phone
+		"4b53bdc1e69f8a01a615a2566ad4b81a26b0a972" to Layout.T9_NO_DPAD // gxa535_t9
+	)
+
+	private var changeListener: InputManager.InputDeviceListener? = null
+	protected val _layout = MutableStateFlow(Layout.NONE)
+	val layout: StateFlow<Layout> = _layout
 
 
-	override fun detect(device: InputDevice?) {
-		if (isSidephone) {
-			super.detect(device)
-			return
-		}
+	abstract fun onChange()
 
+
+	init {
+		_layout.value = Layout.UNKNOWN
+	}
+
+
+	fun detect() {
+		inputManager
+			.inputDeviceIds
+			.map(InputDevice::getDevice)
+			.forEach { detect(it) }
+	}
+
+
+	protected open fun detect(device: InputDevice?) {
 		val oldLayout = _layout.value
 
-		_layout.value = if (dpadKeys.map { KeyCharacterMap.deviceHasKey(it) }.all { it }) {
-			Layout.T9
+		_layout.value = Layout.NONE
+
+		_layout.value = if (
+			device != null
+			&& !device.isVirtual
+			&& device.supportsSource(InputDevice.SOURCE_KEYBOARD)
+		) {
+			layouts[device.descriptor] ?: Layout.NONE
 		} else {
 			Layout.NONE
 		}
@@ -42,11 +60,21 @@ abstract class Keypad(inputManager: InputManager) : SidephoneKeypad(inputManager
 	}
 
 
-	override fun listenForChanges() {
-		if (isSidephone) super.listenForChanges()
+	open fun listenForChanges() {
+		if (changeListener == null) {
+			changeListener = object : InputManager.InputDeviceListener {
+				override fun onInputDeviceAdded(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
+				override fun onInputDeviceRemoved(deviceId: Int) { _layout.value = Layout.NONE; onChange() }
+				override fun onInputDeviceChanged(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
+			}
+		}
+
+		inputManager.registerInputDeviceListener(changeListener, Handler(Looper.getMainLooper()))
 	}
 
-	override fun stopListening() {
-		if (isSidephone) super.stopListening()
+	open fun stopListening() {
+		if (changeListener != null) {
+			inputManager.unregisterInputDeviceListener(changeListener)
+		}
 	}
 }

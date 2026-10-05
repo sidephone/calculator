@@ -4,7 +4,7 @@ import android.hardware.input.InputManager
 import android.view.KeyEvent
 import com.sidephone.calculator.calculator.Action
 
-class CalculatorKeypad(inputManager: InputManager) : Keypad(inputManager) {
+class CalculatorKeypad(inputManager: InputManager) : ForeignKeypad(inputManager) {
 	private val keyActions = mutableMapOf<Int, Action>() // empty = use touchscreen
 	internal var onAction: (Action) -> Unit = { action -> onAction(action) }
 
