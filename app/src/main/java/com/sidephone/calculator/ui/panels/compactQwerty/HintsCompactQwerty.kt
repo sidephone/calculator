@@ -15,7 +15,7 @@ fun HintsCompactQwerty(grid: List<List<Hint?>>, modifier: Modifier = Modifier) {
 	Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(Dimens.hintCellSpacing)) {
 		grid.forEach { row ->
 			Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Dimens.hintCellSpacing)) {
-				row.forEach { hint -> HintCell(hint = hint, modifier = Modifier.weight(1f)) }
+				row.forEach { hint -> HintCell(hint = hint, padding = Dimens.hintCellQwertyPadding, modifier = Modifier.weight(1f)) }
 			}
 		}
 	}

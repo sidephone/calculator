@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 @Composable
 fun HintCellFunction(hint: Hint, textColor: Color) {
 	Text(
-		text = stringResource(hint.functionLabelResId),
+		text = if (hint.functionLabelResId != 0) stringResource(hint.functionLabelResId) else "",
 		style = if (hint.functionLabelIsLarge) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
 		color = textColor,
 		textAlign = TextAlign.Center,

@@ -16,9 +16,9 @@ fun HintsT9Side(modifier: Modifier = Modifier, top: Hint, middle: Hint, bottom: 
 		modifier = modifier,
 		verticalArrangement = Arrangement.spacedBy(Dimens.hintCellSpacing)
 	) {
-		HintCell(modifier = Modifier.weight(1.6f).width(Dimens.hintCellMinWidth), hint = top)
-		HintCell(modifier = Modifier.weight(1.6f).width(Dimens.hintCellMinWidth), hint = middle)
+		HintCell(modifier = Modifier.weight(1.6f).width(Dimens.hintCellMinWidth), padding = Dimens.hintCellT9Padding, hint = top)
+		HintCell(modifier = Modifier.weight(1.6f).width(Dimens.hintCellMinWidth), padding = Dimens.hintCellT9Padding, hint = middle)
 		Box(modifier = Modifier.weight(0.55f).width(Dimens.hintCellMinWidth))
-		HintCell(modifier = Modifier.weight(1.25f).width(Dimens.hintCellMinWidth), hint = bottom)
+		HintCell(modifier = Modifier.weight(1.25f).width(Dimens.hintCellMinWidth), padding = Dimens.hintCellT9Padding, hint = bottom)
 	}
 }

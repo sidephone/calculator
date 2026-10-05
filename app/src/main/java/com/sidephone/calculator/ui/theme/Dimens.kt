@@ -13,6 +13,7 @@ object Dimens {
 
 	val hintCellBorderRadius = 20.dp
 	val hintCellMinWidth = 56.dp
-	val hintCellPadding = 4.dp
 	val hintCellSpacing = 4.dp
+	val hintCellQwertyPadding = 0.dp
+	val hintCellT9Padding = 4.dp
 }
