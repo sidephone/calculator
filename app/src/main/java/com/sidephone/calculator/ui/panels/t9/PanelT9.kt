@@ -4,9 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.sidephone.calculator.R
@@ -68,12 +73,14 @@ fun PanelT9(modifier: Modifier, calculator: Calculator) {
 			.fillMaxSize()
 			.background(color = MaterialTheme.colorScheme.background)
 	) {
-		Row(modifier = Modifier.weight(4f)) { ExpressionField(calculator) }
+		ExpressionField(modifier = Modifier.weight(4f), calculator = calculator)
+		HorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = Dimens.dividerHorizontal))
 		Row(modifier = Modifier.weight(3f)) {
 			Box(modifier = Modifier.width(Dimens.hintCellMinWidth))
 			HintsDpad(modifier = Modifier.weight(1f), grid = dpadHints)
+			VerticalDivider(modifier = Modifier.fillMaxHeight().padding(horizontal = Dimens.dividerVertical))
 			HintsT9Side(
-				modifier = Modifier.width(Dimens.hintCellMinWidth),
+				modifier = Modifier.padding(horizontal = Dimens.hintCellT9Padding).width(Dimens.hintCellMinWidth),
 				top = Hint(
 					functionLabelResId = R.string.button_ac,
 					secondaryStyle = true,

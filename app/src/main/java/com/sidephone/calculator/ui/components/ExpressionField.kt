@@ -16,7 +16,7 @@ import com.sidephone.calculator.input.Keypad
 import com.sidephone.calculator.ui.theme.Dimens
 
 @Composable
-fun ExpressionField(calculator: Calculator) {
+fun ExpressionField(modifier: Modifier, calculator: Calculator) {
 	val expression = calculator.expression.collectAsState().value
 	val output = if (expression.isEmpty()) "0"
 	else if (expression == "Error") stringResource(R.string.error)
@@ -25,7 +25,7 @@ fun ExpressionField(calculator: Calculator) {
 	val fontSize = determineFontSize(output, calculator.layout.collectAsState().value)
 
 	Text(
-		modifier = Modifier
+		modifier = modifier
 			.fillMaxWidth()
 			.padding(top = Dimens.expressionPadding, bottom = Dimens.expressionPaddingBottom, start = Dimens.expressionPadding, end = Dimens.expressionPadding),
 		color = MaterialTheme.colorScheme.onBackground,

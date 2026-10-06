@@ -2,9 +2,10 @@ package com.sidephone.calculator.ui.panels.compactQwerty
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +14,7 @@ import com.sidephone.calculator.calculator.Action
 import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.ui.components.ExpressionField
 import com.sidephone.calculator.ui.components.Hint
+import com.sidephone.calculator.ui.theme.Dimens
 
 @Composable
 fun PanelCompactQwerty(modifier: Modifier, calculator: Calculator) {
@@ -68,7 +70,8 @@ fun PanelCompactQwerty(modifier: Modifier, calculator: Calculator) {
 			.fillMaxSize()
 			.background(color = MaterialTheme.colorScheme.background)
 	) {
-		Row(modifier = Modifier.weight(1f)) { ExpressionField(calculator) }
+		ExpressionField(modifier = Modifier.weight(1f), calculator = calculator)
+		HorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = Dimens.dividerHorizontal))
 		HintsCompactQwerty(grid, modifier = Modifier.fillMaxWidth())
 	}
 }
