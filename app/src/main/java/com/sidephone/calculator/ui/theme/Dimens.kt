@@ -8,6 +8,9 @@ object Dimens {
 	val buttonTextSize = 20.sp
 	val buttonLargeTextSize = 26.sp
 
+	val dividerHorizontal = 8.dp
+	val dividerVertical = 12.dp
+
 	val expressionFontSizeDefault = 36.sp
 	val expressionFontSizeCompactQwerty = mapOf(
 		42 to expressionFontSizeDefault,

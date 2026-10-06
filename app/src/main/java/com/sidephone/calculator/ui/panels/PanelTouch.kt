@@ -3,6 +3,9 @@ package com.sidephone.calculator.ui.panels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,11 +17,13 @@ import com.sidephone.calculator.ui.components.ButtonAC
 import com.sidephone.calculator.ui.components.ButtonEquals
 import com.sidephone.calculator.ui.components.ButtonLargeText
 import com.sidephone.calculator.ui.components.ExpressionField
+import com.sidephone.calculator.ui.theme.Dimens
 
 @Composable
 fun PanelTouch(modifier: Modifier, calculator: Calculator) {
 	Column(modifier = modifier.background(color = MaterialTheme.colorScheme.background)) {
-		Row(modifier = Modifier.weight(1f)) { ExpressionField(calculator) }
+		ExpressionField(modifier = Modifier.weight(1f), calculator = calculator)
+		HorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = Dimens.dividerHorizontal))
 		Row {
 			Column {
 				val buttonModifier = Modifier.weight(1f)
