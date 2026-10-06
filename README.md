@@ -11,4 +11,4 @@ Tested with Android Studio Rabbit 1 | 2026.2.1
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
-Calculate icons created by [Pixel perfect - Flatico](https://www.flaticon.com/free-icons/calculator).
+Calculator icons created by [Icon home - Flaticon](https://www.flaticon.com/free-icons/calculator).
