@@ -13,7 +13,6 @@ class Calculator(inputManager: InputManager) {
 
 	init {
 		keypad.onAction = { action -> engine.onAction(action) }
-		keypad.detect()
 	}
 
 	fun listenForKeypadChange() = keypad.listenForChanges()

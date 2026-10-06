@@ -28,15 +28,15 @@ abstract class ForeignKeypad(inputManager: InputManager) : Keypad(inputManager) 
 			return
 		}
 
-		val oldLayout = _layout.value
+		val oldLayout = layoutState.value
 
-		_layout.value = if (dpadKeys.map { KeyCharacterMap.deviceHasKey(it) }.all { it }) {
+		layoutState.value = if (dpadKeys.map { KeyCharacterMap.deviceHasKey(it) }.all { it }) {
 			Layout.T9
 		} else {
 			Layout.NONE
 		}
 
-		if (oldLayout != _layout.value) {
+		if (oldLayout != layoutState.value) {
 			onChange()
 		}
 	}

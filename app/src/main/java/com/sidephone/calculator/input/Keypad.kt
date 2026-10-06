@@ -19,15 +19,15 @@ abstract class Keypad(private val inputManager: InputManager) {
 	)
 
 	private var changeListener: InputManager.InputDeviceListener? = null
-	protected val _layout = MutableStateFlow(Layout.NONE)
-	val layout: StateFlow<Layout> = _layout
+	protected val layoutState = MutableStateFlow(Layout.NONE)
+	val layout: StateFlow<Layout> = layoutState
 
 
 	abstract fun onChange()
 
 
 	init {
-		_layout.value = Layout.UNKNOWN
+		layoutState.value = Layout.UNKNOWN
 	}
 
 
@@ -40,11 +40,11 @@ abstract class Keypad(private val inputManager: InputManager) {
 
 
 	protected open fun detect(device: InputDevice?) {
-		val oldLayout = _layout.value
+		val oldLayout = layoutState.value
 
-		_layout.value = Layout.NONE
+		layoutState.value = Layout.NONE
 
-		_layout.value = if (
+		layoutState.value = if (
 			device != null
 			&& !device.isVirtual
 			&& device.supportsSource(InputDevice.SOURCE_KEYBOARD)
@@ -54,17 +54,19 @@ abstract class Keypad(private val inputManager: InputManager) {
 			Layout.NONE
 		}
 
-		if (oldLayout != _layout.value) {
+		if (oldLayout != layoutState.value) {
 			onChange()
 		}
 	}
 
 
 	open fun listenForChanges() {
+		detect()
+
 		if (changeListener == null) {
 			changeListener = object : InputManager.InputDeviceListener {
 				override fun onInputDeviceAdded(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
-				override fun onInputDeviceRemoved(deviceId: Int) { _layout.value = Layout.NONE; onChange() }
+				override fun onInputDeviceRemoved(deviceId: Int) { layoutState.value = Layout.NONE; onChange() }
 				override fun onInputDeviceChanged(deviceId: Int) { detect(InputDevice.getDevice(deviceId)) }
 			}
 		}
