@@ -18,13 +18,14 @@ import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.input.Keypad
 
 @Composable
-fun ChangeLayoutButton(modifier: Modifier, calculator: Calculator) {
+fun ChangeLayoutButton(modifier: Modifier = Modifier, calculator: Calculator) {
 	val expression = calculator.expression.collectAsState().value
 	if (expression.isNotEmpty() && expression != "0") {
 		return
 	}
 
-	val title = when (calculator.layoutOverride.collectAsState().value) {
+	val layoutOverride = calculator.layoutOverride.collectAsState().value
+	val title = when (layoutOverride) {
 		Keypad.Layout.COMPACT_QWERTY -> stringResource(id = R.string.layout_qwerty)
 		Keypad.Layout.T9,
 		Keypad.Layout.T9_NO_DPAD -> stringResource(id = R.string.layout_t9)
