@@ -13,16 +13,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.input.Keypad
+import com.sidephone.calculator.ui.panels.PanelTouch
 import com.sidephone.calculator.ui.panels.compactQwerty.PanelCompactQwerty
 import com.sidephone.calculator.ui.panels.t9.PanelT9
-import com.sidephone.calculator.ui.panels.PanelTouch
 import com.sidephone.calculator.ui.theme.CalculatorTheme
 
 class MainActivity : ComponentActivity() {
 	private lateinit var calculator: Calculator
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		calculator = Calculator(getSystemService(INPUT_SERVICE) as InputManager)
+		calculator = Calculator(
+			Settings(this),
+			getSystemService(INPUT_SERVICE) as InputManager
+		)
 
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
@@ -67,5 +70,10 @@ class MainActivity : ComponentActivity() {
 
 	override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
 		return calculator.onKeyUp(keyCode) || super.onKeyUp(keyCode, event)
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		calculator.destroy()
 	}
 }
