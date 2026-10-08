@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -41,6 +42,7 @@ fun ChangeLayoutButton(modifier: Modifier = Modifier, calculator: Calculator) {
 	) {
 		IconButton(
 			modifier = Modifier
+				.focusProperties { canFocus = false }
 				.padding(horizontal = 0.dp)
 				.semantics { contentDescription = accessibilityTitle },
 			onClick = { calculator.nextLayout() },
