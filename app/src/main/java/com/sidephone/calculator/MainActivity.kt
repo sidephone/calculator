@@ -22,12 +22,13 @@ class MainActivity : ComponentActivity() {
 	private lateinit var calculator: Calculator
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+
 		calculator = Calculator(
 			Settings(this),
 			getSystemService(INPUT_SERVICE) as InputManager
 		)
 
-		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
 		setContent {
 			CalculatorTheme {
