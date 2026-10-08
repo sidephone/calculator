@@ -11,6 +11,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 
@@ -20,8 +21,9 @@ class Calculator(private val settings: Settings, inputManager: InputManager) {
 	private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
 	val expression: StateFlow<String> = engine.expression
-
 	private val _layoutOverride = MutableStateFlow(settings.getScreenLayout())
+	val layoutOverride: StateFlow<Keypad.Layout> = _layoutOverride.asStateFlow()
+
 	val layout: StateFlow<Keypad.Layout> = combine(keypad.layout, _layoutOverride) { detected, override ->
 		if (override != Keypad.Layout.UNKNOWN) override else detected
 	}.stateIn(scope, SharingStarted.Eagerly, keypad.layout.value)
@@ -36,9 +38,17 @@ class Calculator(private val settings: Settings, inputManager: InputManager) {
 	fun onAction(action: Action) = engine.onAction(action)
 	fun onKeyDown(keyCode: Int) = keypad.onKeyDown(keyCode)
 	fun onKeyUp(keyCode: Int) = keypad.onKeyUp(keyCode)
-	fun setLayoutOverride(preferred: Keypad.Layout) {
+	fun stopListeningForKeypadChange() = keypad.stopListening()
+
+
+	fun nextLayout() {
+		val preferred = when (_layoutOverride.value) {
+			Keypad.Layout.UNKNOWN -> Keypad.Layout.T9
+			Keypad.Layout.T9, Keypad.Layout.T9_NO_DPAD -> Keypad.Layout.COMPACT_QWERTY
+			Keypad.Layout.COMPACT_QWERTY -> Keypad.Layout.NONE
+			else -> Keypad.Layout.UNKNOWN
+		}
 		settings.setScreenLayout(preferred)
 		_layoutOverride.value = preferred
 	}
-	fun stopListeningForKeypadChange() = keypad.stopListening()
 }

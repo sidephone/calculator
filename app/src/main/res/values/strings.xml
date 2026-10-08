@@ -2,26 +2,31 @@
 	<string name="app_name">Sidephone Calculator</string>
 	<string name="error">Error</string>
 
-	<string name="button_0">0</string>
-	<string name="button_1">1</string>
-	<string name="button_2">2</string>
-	<string name="button_3">3</string>
-	<string name="button_4">4</string>
-	<string name="button_5">5</string>
-	<string name="button_6">6</string>
-	<string name="button_7">7</string>
-	<string name="button_8">8</string>
-	<string name="button_9">9</string>
+	<string name="button_0" translatable="false">0</string>
+	<string name="button_1" translatable="false">1</string>
+	<string name="button_2" translatable="false">2</string>
+	<string name="button_3" translatable="false">3</string>
+	<string name="button_4" translatable="false">4</string>
+	<string name="button_5" translatable="false">5</string>
+	<string name="button_6" translatable="false">6</string>
+	<string name="button_7" translatable="false">7</string>
+	<string name="button_8" translatable="false">8</string>
+	<string name="button_9" translatable="false">9</string>
 
-	<string name="button_ac">AC</string>
-	<string name="button_add">+</string>
-	<string name="button_backspace">⌫</string>
-	<string name="button_divide">÷</string>
-	<string name="button_dot">.</string>
-	<string name="button_equals">=</string>
-	<string name="button_multiply">×</string>
-	<string name="button_parenthesis_left">(</string>
-	<string name="button_parenthesis_right">)</string>
-	<string name="button_period">.</string>
-	<string name="button_subtract">−</string>
+	<string name="button_ac" translatable="false">AC</string>
+	<string name="button_add" translatable="false">+</string>
+	<string name="button_backspace" translatable="false">⌫</string>
+	<string name="button_divide" translatable="false">÷</string>
+	<string name="button_dot" translatable="false">.</string>
+	<string name="button_equals" translatable="false">=</string>
+	<string name="button_multiply" translatable="false">×</string>
+	<string name="button_parenthesis_left" translatable="false">(</string>
+	<string name="button_parenthesis_right" translatable="false">)</string>
+	<string name="button_period" translatable="false">.</string>
+	<string name="button_subtract" translatable="false">−</string>
+
+	<string name="layout_auto">Auto</string>
+	<string name="layout_none">Touchscreen</string>
+	<string name="layout_qwerty" translatable="false">QWERTY</string>
+	<string name="layout_t9" translatable="false">T9</string>
 </resources>
