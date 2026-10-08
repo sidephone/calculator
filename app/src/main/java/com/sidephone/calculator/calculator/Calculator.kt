@@ -26,7 +26,11 @@ class Calculator(private val settings: Settings, inputManager: InputManager) {
 
 	val layout: StateFlow<Keypad.Layout> = combine(keypad.layout, _layoutOverride) { detected, override ->
 		if (override != Keypad.Layout.UNKNOWN) override else detected
-	}.stateIn(scope, SharingStarted.Eagerly, keypad.layout.value)
+	}.stateIn(
+		scope,
+		SharingStarted.Eagerly,
+		if (_layoutOverride.value != Keypad.Layout.UNKNOWN) _layoutOverride.value else keypad.layout.value
+	)
 
 
 	init {
