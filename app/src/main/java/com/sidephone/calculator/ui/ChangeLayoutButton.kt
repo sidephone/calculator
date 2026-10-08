@@ -10,6 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.sidephone.calculator.R
 import com.sidephone.calculator.calculator.Calculator
@@ -30,13 +32,17 @@ fun ChangeLayoutButton(modifier: Modifier, calculator: Calculator) {
 		else -> stringResource(id = R.string.layout_auto)
 	}
 
+	val accessibilityTitle = stringResource(id = R.string.layout_change_accessibility, title)
+
 	Row(
 		modifier = modifier,
 		verticalAlignment = Alignment.CenterVertically
 	) {
 		IconButton(
-			modifier = Modifier.padding(horizontal = 0.dp),
-			onClick = { calculator.nextLayout() }
+			modifier = Modifier
+				.padding(horizontal = 0.dp)
+				.semantics { contentDescription = accessibilityTitle },
+			onClick = { calculator.nextLayout() },
 		) {
 			Text("\u2328", style = MaterialTheme.typography.titleMedium)
 		}

@@ -25,6 +25,7 @@
 	<string name="button_period" translatable="false">.</string>
 	<string name="button_subtract" translatable="false">−</string>
 
+	<string name="layout_change_accessibility">Change keypad layout. Current: %1$s</string>
 	<string name="layout_auto">Auto</string>
 	<string name="layout_none">Touchscreen</string>
 	<string name="layout_qwerty" translatable="false">QWERTY</string>
