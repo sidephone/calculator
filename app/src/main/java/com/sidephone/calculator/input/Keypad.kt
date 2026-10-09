@@ -74,6 +74,7 @@ abstract class Keypad(private val inputManager: InputManager) {
 		inputManager.registerInputDeviceListener(changeListener, Handler(Looper.getMainLooper()))
 	}
 
+
 	open fun stopListening() {
 		if (changeListener != null) {
 			inputManager.unregisterInputDeviceListener(changeListener)
