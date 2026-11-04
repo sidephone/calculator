@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">Sidephone Calculator</string>
+	<string name="app_name">Calculator</string>
 	<string name="error">Error</string>
 
 	<string name="button_0" translatable="false">0</string>
