@@ -12,7 +12,3 @@ Tested with Android Studio Rabbit 2 | 2026.2.2
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 Calculator icons created by [Icon home - Flaticon](https://www.flaticon.com/free-icons/calculator).
-
-
-## TODO
-- Disable touchscreen when not needed

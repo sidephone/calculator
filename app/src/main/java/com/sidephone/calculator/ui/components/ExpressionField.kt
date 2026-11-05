@@ -1,5 +1,8 @@
 package com.sidephone.calculator.ui.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -24,17 +27,27 @@ fun ExpressionField(modifier: Modifier, calculator: Calculator) {
 
 	val fontSize = determineFontSize(output, calculator.layout.collectAsState().value)
 
-	Text(
-		modifier = modifier
-			.fillMaxWidth()
-			.padding(top = Dimens.expressionPadding, bottom = Dimens.expressionPaddingBottom, start = Dimens.expressionPadding, end = Dimens.expressionPadding),
-		color = MaterialTheme.colorScheme.onBackground,
-		style = MaterialTheme.typography.displaySmall,
-		fontSize = fontSize,
-		lineHeight = fontSize * Dimens.expressionLineSizeMultiplier,
-		text = output,
-		textAlign = TextAlign.End,
-	)
+	Row(
+		modifier = modifier.fillMaxWidth(),
+		horizontalArrangement = Arrangement.End
+	) {
+		Text(
+			modifier = Modifier
+				.background(MaterialTheme.colorScheme.background)
+				.padding(
+					top = Dimens.expressionPadding,
+					bottom = Dimens.expressionPaddingBottom,
+					start = Dimens.expressionPadding,
+					end = Dimens.expressionPadding
+				),
+			color = MaterialTheme.colorScheme.onBackground,
+			style = MaterialTheme.typography.displaySmall,
+			fontSize = fontSize,
+			lineHeight = fontSize * Dimens.expressionLineSizeMultiplier,
+			textAlign = TextAlign.End,
+			text = output,
+		)
+	}
 }
 
 

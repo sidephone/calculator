@@ -8,6 +8,8 @@ object Dimens {
 	val buttonTextSize = 20.sp
 	val buttonLargeTextSize = 26.sp
 
+	val buttonChangeLayoutPaddingTop = 4.dp
+
 	val dividerHorizontal = 8.dp
 	val dividerVertical = 12.dp
 

@@ -6,13 +6,14 @@ import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.ui.CalculatorLayout
 import com.sidephone.calculator.ui.ChangeLayoutButton
@@ -33,16 +34,14 @@ class MainActivity : ComponentActivity() {
 		setContent {
 			CalculatorTheme {
 				Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-					Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-						CalculatorLayout(
-							modifier = Modifier.fillMaxSize(),
-							calculator = calculator
-						)
-
-						ChangeLayoutButton(
-							modifier = Modifier.padding(top = 4.dp).align(Alignment.TopStart),
-							calculator = calculator
-						)
+					Box(
+						modifier = Modifier
+							.fillMaxSize()
+							.background(color = MaterialTheme.colorScheme.background)
+							.padding(innerPadding)
+					) {
+						ChangeLayoutButton(modifier = Modifier.align(Alignment.TopStart), calculator = calculator)
+						CalculatorLayout(modifier = Modifier.fillMaxSize(), calculator = calculator)
 					}
 				}
 			}
