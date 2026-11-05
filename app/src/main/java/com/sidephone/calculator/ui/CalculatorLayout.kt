@@ -17,10 +17,16 @@ fun CalculatorLayout(modifier: Modifier, calculator: Calculator) {
 			calculator = calculator
 		)
 
-		Keypad.Layout.T9,
+		Keypad.Layout.T9 -> PanelT9(
+			modifier = modifier,
+			calculator = calculator,
+			allowTouch = false
+		)
+
 		Keypad.Layout.T9_NO_DPAD -> PanelT9(
 			modifier = modifier,
-			calculator = calculator
+			calculator = calculator,
+			allowTouch = true
 		)
 
 		else -> PanelTouch(
