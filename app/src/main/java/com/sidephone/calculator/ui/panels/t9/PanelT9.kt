@@ -23,14 +23,14 @@ import com.sidephone.calculator.ui.theme.Dimens
 
 
 @Composable
-fun PanelT9(modifier: Modifier, calculator: Calculator) {
+fun PanelT9(modifier: Modifier, calculator: Calculator, allowTouch: Boolean) {
 	val dpadHints: List<List<Hint?>> = listOf(
 		listOf(
 			null,
 			Hint(
 				functionLabelResId = R.string.button_divide,
 				functionLabelIsLarge = true,
-				onClick = { calculator.onAction(Action.DIVIDE) }
+				onClick = if (allowTouch) {{ calculator.onAction(Action.DIVIDE) }} else null
 			),
 			null,
 			null,
@@ -40,18 +40,18 @@ fun PanelT9(modifier: Modifier, calculator: Calculator) {
 			Hint(
 				functionLabelResId = R.string.button_add,
 				functionLabelIsLarge = true,
-				onClick = { calculator.onAction(Action.ADD) }
+				onClick = if (allowTouch) {{ calculator.onAction(Action.ADD) }} else null
 			),
 			Hint(
 				functionLabelResId = R.string.button_equals,
 				functionLabelIsLarge = true,
 				primaryStyle = true,
-				onClick = { calculator.onAction(Action.EQUALS) }
+				onClick = if (allowTouch) {{ calculator.onAction(Action.EQUALS) }} else null
 			),
 			Hint(
 				functionLabelResId = R.string.button_subtract,
 				functionLabelIsLarge = true,
-				onClick = { calculator.onAction(Action.SUBTRACT) }
+				onClick = if (allowTouch) {{ calculator.onAction(Action.SUBTRACT) }} else null
 			),
 			null
 		),
@@ -61,7 +61,7 @@ fun PanelT9(modifier: Modifier, calculator: Calculator) {
 			Hint(
 				functionLabelResId = R.string.button_multiply,
 				functionLabelIsLarge = true,
-				onClick = { calculator.onAction(Action.MULTIPLY) }
+				onClick = if (allowTouch) {{ calculator.onAction(Action.MULTIPLY) }} else null
 			),
 			null,
 			null,
@@ -84,16 +84,16 @@ fun PanelT9(modifier: Modifier, calculator: Calculator) {
 				top = Hint(
 					functionLabelResId = R.string.button_ac,
 					secondaryStyle = true,
-					onClick = { calculator.onAction(Action.ALL_CLEAR) }
+					onClick = if (allowTouch) {{ calculator.onAction(Action.ALL_CLEAR) }} else null
 				),
 				middle = Hint(
 					functionLabelResId = R.string.button_backspace,
-					onClick = { calculator.onAction(Action.BACKSPACE) }
+					onClick = if (allowTouch) {{ calculator.onAction(Action.BACKSPACE) }} else null
 				),
 				bottom = Hint(
 					functionLabelResId = R.string.button_period,
 					functionLabelIsLarge = true,
-					onClick = { calculator.onAction(Action.PERIOD) }
+					onClick = if (allowTouch) {{ calculator.onAction(Action.PERIOD) }} else null
 				)
 			)
 		}
