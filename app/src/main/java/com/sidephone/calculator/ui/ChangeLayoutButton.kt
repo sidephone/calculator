@@ -17,13 +17,13 @@ import androidx.compose.ui.unit.dp
 import com.sidephone.calculator.R
 import com.sidephone.calculator.calculator.Calculator
 import com.sidephone.calculator.input.Keypad
+import com.sidephone.calculator.ui.theme.DISABLED_ALPHA
+import com.sidephone.calculator.ui.theme.Dimens
 
 @Composable
 fun ChangeLayoutButton(modifier: Modifier = Modifier, calculator: Calculator) {
 	val expression = calculator.expression.collectAsState().value
-	if (expression.isNotEmpty() && expression != "0") {
-		return
-	}
+	val enabled = (expression.isEmpty() || expression == "0")
 
 	val layoutOverride = calculator.layoutOverride.collectAsState().value
 	val title = when (layoutOverride) {
@@ -37,7 +37,7 @@ fun ChangeLayoutButton(modifier: Modifier = Modifier, calculator: Calculator) {
 	val accessibilityTitle = stringResource(id = R.string.layout_change_accessibility, title)
 
 	Row(
-		modifier = modifier,
+		modifier = modifier.padding(top = Dimens.buttonChangeLayoutPaddingTop),
 		verticalAlignment = Alignment.CenterVertically
 	) {
 		IconButton(
@@ -45,10 +45,23 @@ fun ChangeLayoutButton(modifier: Modifier = Modifier, calculator: Calculator) {
 				.focusProperties { canFocus = false }
 				.padding(horizontal = 0.dp)
 				.semantics { contentDescription = accessibilityTitle },
-			onClick = { calculator.nextLayout() },
+			onClick = { if (enabled) calculator.nextLayout() },
+			enabled = enabled,
 		) {
-			Text("\u2328", style = MaterialTheme.typography.titleMedium)
+			Text(
+				text = "\u2328",
+				style = MaterialTheme.typography.titleMedium,
+				color =
+					if (enabled) MaterialTheme.colorScheme.onBackground
+					else MaterialTheme.colorScheme.onBackground.copy(alpha = DISABLED_ALPHA)
+			)
 		}
-		Text(title, style = MaterialTheme.typography.labelLarge)
+		Text(
+			text = title,
+			style = MaterialTheme.typography.labelLarge,
+			color =
+				if (enabled) MaterialTheme.colorScheme.onBackground
+				else MaterialTheme.colorScheme.onBackground.copy(alpha = DISABLED_ALPHA)
+		)
 	}
 }

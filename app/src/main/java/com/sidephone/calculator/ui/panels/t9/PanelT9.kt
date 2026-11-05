@@ -1,6 +1,5 @@
 package com.sidephone.calculator.ui.panels.t9
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -69,9 +67,7 @@ fun PanelT9(modifier: Modifier, calculator: Calculator, allowTouch: Boolean) {
 	)
 
 	Column(
-		modifier = modifier
-			.fillMaxSize()
-			.background(color = MaterialTheme.colorScheme.background)
+		modifier = modifier.fillMaxSize()
 	) {
 		ExpressionField(modifier = Modifier.weight(4f), calculator = calculator)
 		HorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = Dimens.dividerHorizontal))
