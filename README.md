@@ -6,9 +6,13 @@ Optimized to use on Sidephone SP-01 with the Compact-QWERTY and T9 tiles.
 ## Development Setup
 Just clone the project and import it in Android Studio. It has no extra dependencies, so you can build and run it directly in the emulator or on a real device.
 
-Tested with Android Studio Rabbit 1 | 2026.2.1
+Tested with Android Studio Rabbit 2 | 2026.2.2
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 Calculator icons created by [Icon home - Flaticon](https://www.flaticon.com/free-icons/calculator).
+
+
+## TODO
+- Disable touchscreen when not needed
